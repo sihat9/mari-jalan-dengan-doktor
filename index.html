@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pendaftaran Berjalan Bersama Doktor</title>
 
-  <!-- ============ GAYA ============ -->
+  <!-- ============= GAYA ============= -->
   <style>
   :root{
     --primary-color:#2c7be5;
@@ -17,15 +17,14 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
   body{
-    background:#f5f7fa;
-    color:var(--dark-color);
-    line-height:1.6;
+    background:#f5f7fa;color:var(--dark-color);line-height:1.6;
     background-image:url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2070&auto=format&fit=crop');
     background-size:cover;background-attachment:fixed;background-position:center;position:relative;
   }
   body::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.85);z-index:-1;}
-  .container{max-width:800px;margin:auto;padding:20px;position:relative;}
+  .container{max-width:800px;margin:auto;padding:20px;}
 
+  /* ---------- Header ---------- */
   header{text-align:center;margin-bottom:30px;}
   header .logo{display:flex;justify-content:center;align-items:center;gap:15px;margin-bottom:15px;}
   header .logo img{max-width:80px;height:auto;}
@@ -33,6 +32,7 @@
   header h1{color:var(--primary-color);margin-bottom:10px;}
   header p{color:var(--gray-color);}
 
+  /* ---------- Borang ---------- */
   form{background:#fff;padding:30px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.05);margin-bottom:30px;}
   .form-group{margin-bottom:20px;}
   label{display:block;margin-bottom:8px;font-weight:500;}
@@ -47,19 +47,23 @@
   .phone-input input{border-radius:0 5px 5px 0;}
   .checkbox-group{display:flex;align-items:center;}
   .checkbox-group input{width:auto;margin-right:10px;}
-
-  .submit-btn{background:var(--primary-color);color:#fff;border:none;padding:12px 25px;font-size:16px;
-    border-radius:5px;cursor:pointer;width:100%;font-weight:500;transition:background .3s;}
+  .submit-btn{
+    background:var(--primary-color);color:#fff;border:none;padding:12px 25px;font-size:16px;
+    border-radius:5px;cursor:pointer;width:100%;font-weight:500;transition:background .3s;
+  }
   .submit-btn:hover{background:#1c6ed8;}
 
+  /* ---------- Info box ---------- */
   .info-box{background:#fff;padding:20px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.05);margin-bottom:30px;}
   .info-box h2{color:var(--primary-color);margin-bottom:10px;font-size:20px;}
   .tentatif-link{display:inline-block;margin-top:10px;color:var(--primary-color);font-weight:500;text-decoration:none;}
   .tentatif-link:hover{text-decoration:underline;}
 
+  /* ---------- Confirmation ---------- */
   #confirmationMessage{background:#e8f4ff;padding:20px;border-radius:5px;margin-bottom:20px;display:none;}
   #confirmationMessage h2{color:var(--primary-color);margin-bottom:10px;}
 
+  /* ---------- Counter ---------- */
   .counter{background:#fff;padding:15px;border-radius:5px;box-shadow:0 5px 15px rgba(0,0,0,.05);text-align:center;margin-bottom:20px;}
   .progress-bar{background:#f0f2f5;height:10px;border-radius:5px;overflow:hidden;}
   .progress{background:var(--secondary-color);height:100%;width:0%;transition:width .5s;}
@@ -76,6 +80,7 @@
   #tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000;}
   #tentatifModal .box{background:#fff;padding:30px;border-radius:10px;max-width:800px;width:90%;max-height:80vh;overflow-y:auto;}
 
+  /* ---------- Responsif ---------- */
   @media(max-width:600px){
     .container{padding:15px;}
     form{padding:20px;}
@@ -158,14 +163,14 @@
 
   <!-- ---------- COUNTER ---------- -->
   <div id="counter" class="counter">
-    <p>Peserta telah mendaftar: <span id="registeredCount">0</span>/10</p>
+    <p>Peserta telah mendaftar: <span id="registeredCount">0</span> orang</p>
     <div class="progress-bar"><div class="progress" id="progressBar"></div></div>
   </div>
 
   <!-- ---------- MODAL TENTATIF ---------- -->
   <div id="tentatifModal">
     <div class="box">
-      <h2 style="color:#2c7be5;text-align:center;margin-bottom:20px;">Tentatif Program</h2>
+      <h2 style="color:var(--primary-color);text-align:center;margin-bottom:20px;">Tentatif Program</h2>
       <table style="width:100%;border-collapse:collapse;">
         <thead>
           <tr style="background:var(--primary-color);color:#fff;">
@@ -176,8 +181,8 @@
           <tr><td style="padding:8px;">7:30 – 8:00 pagi</td><td>Pendaftaran Peserta</td><td>Bawa IC</td></tr>
           <tr style="background:#f2f2f2;"><td style="padding:8px;">8:00 – 8:30 pagi</td><td>Sarapan Sihat</td><td>Disediakan</td></tr>
           <tr><td style="padding:8px;">8:30 – 9:00 pagi</td><td>Taklimat keselamatan</td><td>Oleh doktor</td></tr>
-          <tr style="background:#f2f2f2;"><td style="padding:8px;">9:00 – 11:00 pagi</td><td>Aktiviti Berjalan</td><td>Jarak 5 km</td></tr>
-          <tr><td style="padding:8px;">11:00 – 11:30 pagi</td><td>Pemeriksaan Kesihatan</td><td>Tensi & nadi</td></tr>
+          <tr style="background:#f2f2f2;"><td style="padding:8px;">9:00 – 11:00 pagi</td><td>Aktiviti Berjalan</td><td>Jarak 5 km</td></tr>
+          <tr><td style="padding:8px;">11:00 – 11:30 pagi</td><td>Pemeriksaan Kesihatan</td><td>Tekanan darah & nadi</td></tr>
           <tr style="background:#f2f2f2;"><td style="padding:8px;">11:30 – 12:00 tgh</td><td>Majlis Penutup</td><td>Hadiah early‑bird</td></tr>
         </tbody>
       </table>
@@ -187,97 +192,97 @@
 
 </div><!-- /container -->
 
-<!-- ============ JAVASCRIPT ============ -->
+<!-- ============= JAVASCRIPT ============= -->
 <script>
 /* ---------- Konfigurasi ---------- */
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRSq4IDDG59UimVrhA226--hAjbJ0tWocnKvoglY706Bvj6R3jOei3iG8IqtpIUwBC/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRSq4IDDG59UimVrhA226--hAjbJ0tWocnKvoglY706Bvj6R3jOei3iG8IqtpIUwBC/exec'; // ganti jika URL anda berbeza
 const MAX_EARLY  = 10;
-let   icSet      = new Set();
-let   count      = 0;
+let icSet = new Set(), count = 0;
 
 /* ---------- Utiliti ringkas ---------- */
-const $ = id=>document.getElementById(id);
-const showError = msg=>{ alert(msg); console.error(msg); };
+const $ = id => document.getElementById(id);
+const showError = msg => { alert(msg); console.error(msg); };
 
 /* ---------- Slider ---------- */
-(() => {
-  let cur = 0, slides = document.querySelectorAll('.slide'), btns = document.querySelectorAll('.slide-btn'), timer;
-  const go=i=>{ slides[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active'); };
-  const auto=()=>{ timer=setInterval(()=>go((cur+1)%slides.length),5000); };
-  btns.forEach(b=>b.onclick=()=>{ clearInterval(timer); go(+b.dataset.index); auto(); });
+(function initSlider(){
+  const slides = document.querySelectorAll('.slide'), btns = document.querySelectorAll('.slide-btn');
+  let cur = 0, timer;
+  const go = i => { slides[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active'); };
+  const auto = () => timer = setInterval(()=>go((cur+1)%slides.length),5000);
+  btns.forEach(b=>b.addEventListener('click',()=>{ clearInterval(timer); go(+b.dataset.index); auto(); }));
   auto();
 })();
 
-/* ---------- JSONP untuk dapat senarai IC & kiraan ---------- */
-function loadSheetInfo(){
-  const s=document.createElement('script');
-  s.src=SCRIPT_URL+'?callback=sheetInfo';
-  document.body.appendChild(s);
-}
-function sheetInfo(data){
-  icSet = new Set(data.icList);
-  count = data.count;
-  updateCounter();
-}
-
-/* ---------- Kemaskini visual kaunter ---------- */
+/* ---------- Kemaskini kaunter ---------- */
 function updateCounter(){
   $('registeredCount').textContent = count;
   $('progressBar').style.width = `${Math.min(100,(count/MAX_EARLY)*100)}%`;
 }
 
+/* ---------- JSONP untuk ambil data semasa ---------- */
+function loadSheetInfo(){
+  const sc=document.createElement('script');
+  sc.src = SCRIPT_URL + '?callback=sheetInfo';
+  document.body.appendChild(sc);
+}
+function sheetInfo(d){
+  icSet = new Set(d.icList || []);
+  count = d.count || 0;
+  updateCounter();
+}
+
 /* ---------- Hantar borang ---------- */
-$('registrationForm').addEventListener('submit',async e=>{
+$('registrationForm').addEventListener('submit', async e =>{
   e.preventDefault();
   const ic = $('icNumber').value.trim();
   if(icSet.has(ic)){ showError('IC ini telah didaftarkan.'); return; }
-
   if(!$('agreeTerms').checked){ showError('Sila setujui terma.'); return; }
 
   const data={
-    fullName:$('fullName').value.trim(),
-    icNumber:ic,
-    phoneNumber:'6'+$('phoneNumber').value.trim(),
-    address:$('address').value.trim(),
-    email:$('email').value.trim()||'N/A',
-    timestamp:new Date().toISOString()
+    fullName   : $('fullName').value.trim(),
+    icNumber   : ic,
+    phoneNumber: '6'+$('phoneNumber').value.trim(),
+    address    : $('address').value.trim(),
+    email      : $('email').value.trim() || 'N/A',
+    timestamp  : new Date().toISOString()
   };
 
   try{
     await fetch(SCRIPT_URL,{
-      method:'POST',
-      mode:'no-cors',                       // tiada CORS header diperlukan
+      method :'POST',
+      mode   :'no-cors',                     // bypass CORS check
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data)
+      body   : JSON.stringify(data)
     });
-    /* Anggap berjaya */
+    /* — anggap berjaya — */
     icSet.add(ic); count++; updateCounter();
     $('registrationForm').style.display='none';
     $('confirmationMessage').style.display='block';
-    $('earlyBirdMessage').textContent = count<=MAX_EARLY
-      ? 'Tahniah! Anda antara 10 peserta terawal yang layak hadiah!'
-      : 'Pendaftaran berjaya!';
-  }catch(err){
-    showError('Gagal menghantar. Sila cuba lagi.');
-  }
+    $('earlyBirdMessage').textContent =
+      (count<=MAX_EARLY)
+        ? 'Tahniah! Anda antara 10 peserta terawal yang layak hadiah!'
+        : 'Pendaftaran berjaya!';
+  }catch(err){ showError('Gagal menghantar. Sila cuba lagi.'); }
 });
 
 /* ---------- Modal Tentatif ---------- */
-$('tentatifBtn').onclick=e=>{e.preventDefault();$('tentatifModal').style.display='flex';};
-$('closeModalBtn').onclick=()=>$('tentatifModal').style.display='none';
-$('tentatifModal').onclick=e=>{ if(e.target===$('tentatifModal')) $('tentatifModal').style.display='none'; };
+$('tentatifBtn').addEventListener('click', e => { e.preventDefault(); $('tentatifModal').style.display='flex'; });
+$('closeModalBtn').addEventListener('click', () => $('tentatifModal').style.display='none');
+$('tentatifModal').addEventListener('click', e => { if(e.target === $('tentatifModal')) $('tentatifModal').style.display='none'; });
 
-/* ---------- Format input IC & telefon ---------- */
-$('icNumber').oninput=e=>{
+/* ---------- Input helpers ---------- */
+$('icNumber').addEventListener('input', e=>{
   let v=e.target.value.replace(/\D/g,'');
   if(v.length>6) v=v.slice(0,6)+'-'+v.slice(6);
   if(v.length>9) v=v.slice(0,9)+'-'+v.slice(9);
   e.target.value=v.slice(0,14);
-};
-$('phoneNumber').oninput=e=>{ e.target.value=e.target.value.replace(/\D/g,''); };
+});
+$('phoneNumber').addEventListener('input', e=>{
+  e.target.value=e.target.value.replace(/\D/g,'');
+});
 
 /* ---------- Mula ---------- */
-loadSheetInfo();   // panggil JSONP pertama kali
+loadSheetInfo();   // panggil JSONP untuk data awal
 </script>
 </body>
 </html>
