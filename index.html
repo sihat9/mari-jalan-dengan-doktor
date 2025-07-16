@@ -1,93 +1,283 @@
-<!DOCTYPE html><html lang="ms">
+<!DOCTYPE html>
+<html lang="ms">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Pendaftaran Berjalan Bersama Doktor</title>
-<style>
-/* ——— GAYA dipendekkan ——— */
-:root{--primary-color:#2c7be5;--secondary-color:#00d97e;--gray-color:#95aac9;}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
-body{background:#f5f7fa;color:#12263f;}
-.container{max-width:800px;margin:auto;padding:20px;}
-/* (semua CSS asal anda di sini, tidak diubah) */
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pendaftaran Berjalan Bersama Doktor</title>
+
+  <!-- ============ GAYA ============ -->
+  <style>
+  :root{
+    --primary-color:#2c7be5;
+    --secondary-color:#00d97e;
+    --danger-color:#e63757;
+    --light-color:#f9fafd;
+    --dark-color:#12263f;
+    --gray-color:#95aac9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  body{
+    background:#f5f7fa;
+    color:var(--dark-color);
+    line-height:1.6;
+    background-image:url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2070&auto=format&fit=crop');
+    background-size:cover;background-attachment:fixed;background-position:center;position:relative;
+  }
+  body::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.85);z-index:-1;}
+  .container{max-width:800px;margin:auto;padding:20px;position:relative;}
+
+  header{text-align:center;margin-bottom:30px;}
+  header .logo{display:flex;justify-content:center;align-items:center;gap:15px;margin-bottom:15px;}
+  header .logo img{max-width:80px;height:auto;}
+  header .logo-text{font-size:24px;font-weight:700;color:var(--primary-color);}
+  header h1{color:var(--primary-color);margin-bottom:10px;}
+  header p{color:var(--gray-color);}
+
+  form{background:#fff;padding:30px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.05);margin-bottom:30px;}
+  .form-group{margin-bottom:20px;}
+  label{display:block;margin-bottom:8px;font-weight:500;}
+  input[type=text],input[type=tel],input[type=email],textarea{
+    width:100%;padding:12px 15px;border:1px solid #ddd;border-radius:5px;font-size:16px;transition:border .3s;
+  }
+  input:focus,textarea:focus{outline:none;border-color:var(--primary-color);}
+  .phone-input{display:flex;align-items:center;}
+  .phone-input .prefix{
+    background:#f0f2f5;padding:12px 10px;border:1px solid #ddd;border-right:none;border-radius:5px 0 0 5px;
+  }
+  .phone-input input{border-radius:0 5px 5px 0;}
+  .checkbox-group{display:flex;align-items:center;}
+  .checkbox-group input{width:auto;margin-right:10px;}
+
+  .submit-btn{background:var(--primary-color);color:#fff;border:none;padding:12px 25px;font-size:16px;
+    border-radius:5px;cursor:pointer;width:100%;font-weight:500;transition:background .3s;}
+  .submit-btn:hover{background:#1c6ed8;}
+
+  .info-box{background:#fff;padding:20px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.05);margin-bottom:30px;}
+  .info-box h2{color:var(--primary-color);margin-bottom:10px;font-size:20px;}
+  .tentatif-link{display:inline-block;margin-top:10px;color:var(--primary-color);font-weight:500;text-decoration:none;}
+  .tentatif-link:hover{text-decoration:underline;}
+
+  #confirmationMessage{background:#e8f4ff;padding:20px;border-radius:5px;margin-bottom:20px;display:none;}
+  #confirmationMessage h2{color:var(--primary-color);margin-bottom:10px;}
+
+  .counter{background:#fff;padding:15px;border-radius:5px;box-shadow:0 5px 15px rgba(0,0,0,.05);text-align:center;margin-bottom:20px;}
+  .progress-bar{background:#f0f2f5;height:10px;border-radius:5px;overflow:hidden;}
+  .progress{background:var(--secondary-color);height:100%;width:0%;transition:width .5s;}
+
+  /* ---------- Slider ---------- */
+  .slider-container{width:100%;margin:0 auto 30px;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.1);}
+  .slider{position:relative;height:300px;}
+  .slide{position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#fff;opacity:0;transition:opacity 1s;}
+  .slide.active{opacity:1;}
+  .slide-nav{text-align:center;margin-top:10px;}
+  .slide-nav button{background:var(--primary-color);color:#fff;border:none;padding:5px 10px;margin:0 5px;border-radius:3px;cursor:pointer;}
+
+  /* ---------- Modal ---------- */
+  #tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000;}
+  #tentatifModal .box{background:#fff;padding:30px;border-radius:10px;max-width:800px;width:90%;max-height:80vh;overflow-y:auto;}
+
+  @media(max-width:600px){
+    .container{padding:15px;}
+    form{padding:20px;}
+    .slider{height:200px;}
+  }
+  </style>
 </head>
 <body>
 <div class="container">
-  <!-- ——— HTML BORANG & LAIN‑LAIN KEKAL (dipendekkan) ——— -->
-  <form id="registrationForm"> … </form>
-  <div id="confirmationMessage" class="hidden"> … </div>
-  <div id="counter" class="counter"> … </div>
-</div>
 
+  <!-- ---------- HEADER ---------- -->
+  <header>
+    <div class="logo">
+      <img src="https://via.placeholder.com/80x80?text=KSS" alt="Logo Klinik">
+      <span class="logo-text">Klinik SihatSokmo</span>
+    </div>
+    <h1>Pendaftaran Program "Berjalan Bersama Doktor"</h1>
+    <p>10 peserta terawal berpeluang menebus hadiah istimewa!</p>
+  </header>
+
+  <!-- ---------- SLIDER ---------- -->
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slide active" style="background-image:url('https://via.placeholder.com/800x300?text=Poster+1');"></div>
+      <div class="slide"        style="background-image:url('https://via.placeholder.com/800x300?text=Poster+2');"></div>
+      <div class="slide"        style="background-image:url('https://via.placeholder.com/800x300?text=Poster+3');"></div>
+    </div>
+    <div class="slide-nav">
+      <button class="slide-btn" data-index="0">1</button>
+      <button class="slide-btn" data-index="1">2</button>
+      <button class="slide-btn" data-index="2">3</button>
+    </div>
+  </div>
+
+  <!-- ---------- BORANG ---------- -->
+  <form id="registrationForm">
+    <div class="form-group">
+      <label for="fullName">Nama Penuh Peserta:</label>
+      <input type="text" id="fullName" required>
+    </div>
+    <div class="form-group">
+      <label for="icNumber">No. Kad Pengenalan:</label>
+      <input type="text" id="icNumber" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" placeholder="901231-01-1234" required>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">No. Telefon:</label>
+      <div class="phone-input">
+        <span class="prefix">6</span>
+        <input type="tel" id="phoneNumber" pattern="[0-9]{9,11}" placeholder="0123456789" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address">Alamat:</label>
+      <textarea id="address" rows="3" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="email">Email (optional):</label>
+      <input type="email" id="email">
+    </div>
+    <div class="form-group checkbox-group">
+      <input type="checkbox" id="agreeTerms" required>
+      <label for="agreeTerms">Saya mengakui bahawa maklumat yang diberikan adalah benar.</label>
+    </div>
+    <button type="submit" class="submit-btn">Daftar Sekarang</button>
+  </form>
+
+  <!-- ---------- INFO BOX ---------- -->
+  <div class="info-box">
+    <h2>Tentatif Program</h2>
+    <p>Lihat jadual aktiviti untuk hari program.</p>
+    <a href="#" id="tentatifBtn" class="tentatif-link">Klik di sini untuk lihat tentatif</a>
+  </div>
+
+  <!-- ---------- CONFIRMATION ---------- -->
+  <div id="confirmationMessage" class="hidden">
+    <h2>Pendaftaran Berjaya!</h2>
+    <p id="earlyBirdMessage"></p>
+    <p>Sila hadir ke kaunter pendaftaran Klinik SihatSokmo pada hari program dengan membawa kad pengenalan anda.</p>
+  </div>
+
+  <!-- ---------- COUNTER ---------- -->
+  <div id="counter" class="counter">
+    <p>Peserta telah mendaftar: <span id="registeredCount">0</span>/10</p>
+    <div class="progress-bar"><div class="progress" id="progressBar"></div></div>
+  </div>
+
+  <!-- ---------- MODAL TENTATIF ---------- -->
+  <div id="tentatifModal">
+    <div class="box">
+      <h2 style="color:#2c7be5;text-align:center;margin-bottom:20px;">Tentatif Program</h2>
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:var(--primary-color);color:#fff;">
+            <th style="padding:8px;">Masa</th><th style="padding:8px;">Aktiviti</th><th style="padding:8px;">Catatan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:8px;">7:30 – 8:00 pagi</td><td>Pendaftaran Peserta</td><td>Bawa IC</td></tr>
+          <tr style="background:#f2f2f2;"><td style="padding:8px;">8:00 – 8:30 pagi</td><td>Sarapan Sihat</td><td>Disediakan</td></tr>
+          <tr><td style="padding:8px;">8:30 – 9:00 pagi</td><td>Taklimat keselamatan</td><td>Oleh doktor</td></tr>
+          <tr style="background:#f2f2f2;"><td style="padding:8px;">9:00 – 11:00 pagi</td><td>Aktiviti Berjalan</td><td>Jarak 5 km</td></tr>
+          <tr><td style="padding:8px;">11:00 – 11:30 pagi</td><td>Pemeriksaan Kesihatan</td><td>Tensi & nadi</td></tr>
+          <tr style="background:#f2f2f2;"><td style="padding:8px;">11:30 – 12:00 tgh</td><td>Majlis Penutup</td><td>Hadiah early‑bird</td></tr>
+        </tbody>
+      </table>
+      <button id="closeModalBtn" style="display:block;margin:20px auto 0;padding:8px 20px;background:var(--primary-color);color:#fff;border:none;border-radius:5px;cursor:pointer;">Tutup</button>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- ============ JAVASCRIPT ============ -->
 <script>
-/* ====== KONFIG ====== */
-const SCRIPT_URL   = 'https://script.google.com/macros/s/AKfycbwRSq4IDDG59UimVrhA226--hAjbJ0tWocnKvoglY706Bvj6R3jOei3iG8IqtpIUwBC/exec';
-const MAX_EARLY    = 10;
-let   icSet        = new Set();
-let   count        = 0;
+/* ---------- Konfigurasi ---------- */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRSq4IDDG59UimVrhA226--hAjbJ0tWocnKvoglY706Bvj6R3jOei3iG8IqtpIUwBC/exec';
+const MAX_EARLY  = 10;
+let   icSet      = new Set();
+let   count      = 0;
 
-/* ====== JSONP loader ====== */
+/* ---------- Utiliti ringkas ---------- */
+const $ = id=>document.getElementById(id);
+const showError = msg=>{ alert(msg); console.error(msg); };
+
+/* ---------- Slider ---------- */
+(() => {
+  let cur = 0, slides = document.querySelectorAll('.slide'), btns = document.querySelectorAll('.slide-btn'), timer;
+  const go=i=>{ slides[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active'); };
+  const auto=()=>{ timer=setInterval(()=>go((cur+1)%slides.length),5000); };
+  btns.forEach(b=>b.onclick=()=>{ clearInterval(timer); go(+b.dataset.index); auto(); });
+  auto();
+})();
+
+/* ---------- JSONP untuk dapat senarai IC & kiraan ---------- */
 function loadSheetInfo(){
-  const tag = document.createElement('script');
-  tag.src   = SCRIPT_URL + '?callback=sheetInfo';
-  document.body.appendChild(tag);
+  const s=document.createElement('script');
+  s.src=SCRIPT_URL+'?callback=sheetInfo';
+  document.body.appendChild(s);
 }
 function sheetInfo(data){
   icSet = new Set(data.icList);
   count = data.count;
-  document.getElementById('registeredCount').textContent = count;
-  document.getElementById('progressBar').style.width = `${Math.min(100,(count/MAX_EARLY)*100)}%`;
+  updateCounter();
 }
 
-/* ====== HANTAR BORANG ====== */
-document.getElementById('registrationForm').addEventListener('submit', async e=>{
-  e.preventDefault();
-  const ic = document.getElementById('icNumber').value.trim();
-  if (icSet.has(ic)){ alert('IC sudah didaftarkan!'); return; }
+/* ---------- Kemaskini visual kaunter ---------- */
+function updateCounter(){
+  $('registeredCount').textContent = count;
+  $('progressBar').style.width = `${Math.min(100,(count/MAX_EARLY)*100)}%`;
+}
 
-  const payload = {
-    fullName  : document.getElementById('fullName').value.trim(),
-    icNumber  : ic,
-    phoneNumber:'6'+document.getElementById('phoneNumber').value.trim(),
-    address   : document.getElementById('address').value.trim(),
-    email     : document.getElementById('email').value.trim()||'N/A',
-    timestamp : new Date().toISOString()
+/* ---------- Hantar borang ---------- */
+$('registrationForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const ic = $('icNumber').value.trim();
+  if(icSet.has(ic)){ showError('IC ini telah didaftarkan.'); return; }
+
+  if(!$('agreeTerms').checked){ showError('Sila setujui terma.'); return; }
+
+  const data={
+    fullName:$('fullName').value.trim(),
+    icNumber:ic,
+    phoneNumber:'6'+$('phoneNumber').value.trim(),
+    address:$('address').value.trim(),
+    email:$('email').value.trim()||'N/A',
+    timestamp:new Date().toISOString()
   };
 
   try{
     await fetch(SCRIPT_URL,{
-      method : 'POST',
-      mode   : 'no-cors',                 // ← tiada CORS check
-      headers: {'Content-Type':'application/json'},
-      body   : JSON.stringify(payload)
+      method:'POST',
+      mode:'no-cors',                       // tiada CORS header diperlukan
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
     });
-    /* — anggap berjaya —*/
-    icSet.add(ic);
-    count++;
-    document.getElementById('registeredCount').textContent = count;
-    document.getElementById('progressBar').style.width = `${Math.min(100,(count/MAX_EARLY)*100)}%`;
-    document.getElementById('registrationForm').style.display='none';
-    document.getElementById('confirmationMessage').style.display='block';
-    document.getElementById('earlyBirdMessage').textContent =
-      count<=MAX_EARLY ? 'Tahniah! Anda antara 10 peserta terawal.' : 'Pendaftaran berjaya.';
+    /* Anggap berjaya */
+    icSet.add(ic); count++; updateCounter();
+    $('registrationForm').style.display='none';
+    $('confirmationMessage').style.display='block';
+    $('earlyBirdMessage').textContent = count<=MAX_EARLY
+      ? 'Tahniah! Anda antara 10 peserta terawal yang layak hadiah!'
+      : 'Pendaftaran berjaya!';
   }catch(err){
-    alert('Gagal menghantar. Sila cuba lagi.');
-    console.error(err);
+    showError('Gagal menghantar. Sila cuba lagi.');
   }
 });
 
-/* ====== HELPER INPUT (IC) ====== */
-document.getElementById('icNumber').addEventListener('input', e=>{
-  let v=e.target.value.replace(/\D/g,'');
-  if(v.length>6)v=v.slice(0,6)+'-'+v.slice(6);
-  if(v.length>9)v=v.slice(0,9)+'-'+v.slice(9);
-  e.target.value=v.slice(0,14);
-});
-document.getElementById('phoneNumber').addEventListener('input',e=>{
-  e.target.value=e.target.value.replace(/\D/g,'');
-});
+/* ---------- Modal Tentatif ---------- */
+$('tentatifBtn').onclick=e=>{e.preventDefault();$('tentatifModal').style.display='flex';};
+$('closeModalBtn').onclick=()=>$('tentatifModal').style.display='none';
+$('tentatifModal').onclick=e=>{ if(e.target===$('tentatifModal')) $('tentatifModal').style.display='none'; };
 
-/* ====== MULA ====== */
-loadSheetInfo();          // JSONP panggilan pertama
+/* ---------- Format input IC & telefon ---------- */
+$('icNumber').oninput=e=>{
+  let v=e.target.value.replace(/\D/g,'');
+  if(v.length>6) v=v.slice(0,6)+'-'+v.slice(6);
+  if(v.length>9) v=v.slice(0,9)+'-'+v.slice(9);
+  e.target.value=v.slice(0,14);
+};
+$('phoneNumber').oninput=e=>{ e.target.value=e.target.value.replace(/\D/g,''); };
+
+/* ---------- Mula ---------- */
+loadSheetInfo();   // panggil JSONP pertama kali
 </script>
-</body></html>
+</body>
+</html>
