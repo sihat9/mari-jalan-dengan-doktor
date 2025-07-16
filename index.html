@@ -70,59 +70,74 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   to { transform: rotate(360deg); }
 }
 
-/* Bank Card Style Voucher */
+/* Premium Bank Card Style Voucher (Winner) */
 #voucherCard {
   display: none;
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 25px;
   border-radius: 16px;
   text-align: left;
-  background: linear-gradient(135deg, #2c7be5 0%, #00d97e 100%);
+  background: linear-gradient(135deg, #1a3a6a 0%, #2c7be5 100%);
   color: white;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  min-height: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  min-height: 220px;
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 #voucherCard::before {
   content: '';
   position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, 
+              rgba(255,255,255,0.1) 0%, 
+              rgba(255,255,255,0) 70%);
+}
+
+#voucherCard::after {
+  content: '';
+  position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: url('https://raw.githubusercontent.com/sihat9/mari-jalan-dengan-doktor/main/img/poster1.png') center/cover;
-  opacity: 0.15;
+  opacity: 0.08;
 }
 
 #voucherCard .voucher-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 #voucherCard .voucher-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 #voucherCard .voucher-header img {
-  max-width: 60px;
+  max-width: 70px;
   height: auto;
   filter: brightness(0) invert(1);
 }
 
 #voucherCard .chip {
-  width: 40px;
-  height: 30px;
-  background: #ffd700;
-  border-radius: 5px;
+  width: 50px;
+  height: 35px;
+  background: linear-gradient(135deg, #ffd700 0%, #c5a600 100%);
+  border-radius: 6px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
+/* Chip lines design */
 #voucherCard .chip::before {
   content: '';
   position: absolute;
@@ -130,49 +145,156 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, 
-    rgba(255,255,255,0.3) 0%, 
-    rgba(255,255,255,0.1) 50%, 
-    rgba(255,255,255,0.3) 100%);
+  background: 
+    /* Horizontal lines */
+    linear-gradient(to bottom, 
+      transparent 45%, 
+      rgba(0,0,0,0.15) 45%, 
+      rgba(0,0,0,0.15) 55%, 
+      transparent 55%),
+    /* Vertical lines */
+    linear-gradient(to right, 
+      transparent 45%, 
+      rgba(0,0,0,0.15) 45%, 
+      rgba(0,0,0,0.15) 55%, 
+      transparent 55%),
+    /* Shine effect */
+    linear-gradient(135deg, 
+      rgba(255,255,255,0.3) 0%, 
+      rgba(255,255,255,0) 60%);
 }
 
 #voucherCard h3 {
-  font-size: 18px;
-  margin-bottom: 5px;
+  font-size: 20px;
+  margin-bottom: 8px;
   font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  letter-spacing: 0.5px;
 }
 
 #voucherCard .voucher-details {
-  margin: 20px 0;
+  margin: 25px 0;
+}
+
+#voucherCard .voucher-details p {
+  margin: 8px 0;
+  font-size: 15px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 #voucherCard .voucher-code {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: 3px;
   margin: 15px 0;
-  background: rgba(0,0,0,0.2);
-  padding: 10px;
-  border-radius: 6px;
+  background: rgba(0,0,0,0.15);
+  padding: 12px 15px;
+  border-radius: 8px;
   display: inline-block;
-  font-family: monospace;
+  font-family: 'Courier New', monospace;
+  border: 1px solid rgba(255,255,255,0.2);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.1);
 }
 
 #voucherCard .voucher-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
-  font-size: 12px;
-  opacity: 0.8;
+  margin-top: 25px;
+  font-size: 13px;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Participant Card (Black Background) */
+#participantCard {
+  display: none;
+  margin-top: 30px;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: left;
+  background: linear-gradient(135deg, #222 0%, #000 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  min-height: 220px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+#participantCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, 
+              rgba(255,255,255,0.05) 0%, 
+              rgba(255,255,255,0) 70%);
+}
+
+#participantCard .voucher-content {
+  position: relative;
+  z-index: 3;
+}
+
+#participantCard .voucher-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+#participantCard .voucher-header img {
+  max-width: 70px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+#participantCard h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  letter-spacing: 0.5px;
+}
+
+#participantCard .voucher-details {
+  margin: 25px 0;
+}
+
+#participantCard .voucher-details p {
+  margin: 8px 0;
+  font-size: 15px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+#participantCard .voucher-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  font-size: 13px;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .screenshot-tip {
   font-size: 14px;
-  color: rgba(255,255,255,0.8);
-  margin-top: 10px;
+  color: rgba(255,255,255,0.9);
+  margin-top: 15px;
   font-style: italic;
   text-align: center;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Text emboss effect */
+.emboss-text {
+  text-shadow: 
+    0 1px 0 rgba(255,255,255,0.3),
+    0 -1px 0 rgba(0,0,0,0.3);
 }
 
 #tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000;}
@@ -238,6 +360,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   <div id="confirmationMessage">
     <h2>Pendaftaran Berjaya!</h2>
     <p id="msgLine"></p>
+    
+    <!-- Winner Card (for first 10 participants) -->
     <div id="voucherCard">
       <div class="voucher-content">
         <div class="voucher-header">
@@ -245,17 +369,37 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
           <img src="https://github.com/sihat9/mari-jalan-dengan-doktor/blob/main/img/logo-kss.png?raw=true" alt="Logo Klinik">
         </div>
         <div class="voucher-details">
-          <h3>BAUCAR HADIAH 10 TERAWAL</h3>
-          <p><strong>Nama:</strong> <span id="vName"></span></p>
-          <p><strong>No. IC:</strong> <span id="vIc"></span></p>
-          <p class="voucher-code" id="vCode"></p>
-          <p><strong>Tarikh Tamat:</strong> 31/07/2025</p>
+          <h3 class="emboss-text">BAUCAR HADIAH 10 TERAWAL</h3>
+          <p><strong>Nama:</strong> <span id="vName" class="emboss-text"></span></p>
+          <p><strong>No. IC:</strong> <span id="vIc" class="emboss-text"></span></p>
+          <p class="voucher-code emboss-text" id="vCode"></p>
+          <p><strong>Tarikh Tamat:</strong> <span class="emboss-text">31/07/2025</span></p>
         </div>
         <div class="voucher-footer">
-          <span>Program Mari Jalan Dengan Doktor</span>
-          <span>Klinik SihatSokmo</span>
+          <span class="emboss-text">Program Mari Jalan Dengan Doktor</span>
+          <span class="emboss-text">Klinik SihatSokmo</span>
         </div>
         <p class="screenshot-tip">Sila screenshot kad ini & tunjuk di kaunter penebusan</p>
+      </div>
+    </div>
+    
+    <!-- Participant Card (for other participants) -->
+    <div id="participantCard">
+      <div class="voucher-content">
+        <div class="voucher-header">
+          <img src="https://github.com/sihat9/mari-jalan-dengan-doktor/blob/main/img/logo-kss.png?raw=true" alt="Logo Klinik">
+        </div>
+        <div class="voucher-details">
+          <h3 class="emboss-text">PESERTA PROGRAM</h3>
+          <p><strong>Nama:</strong> <span id="pName" class="emboss-text"></span></p>
+          <p><strong>No. IC:</strong> <span id="pIc" class="emboss-text"></span></p>
+          <p><strong>Tarikh Program:</strong> <span class="emboss-text">26/07/2025</span></p>
+        </div>
+        <div class="voucher-footer">
+          <span class="emboss-text">Program Mari Jalan Dengan Doktor</span>
+          <span class="emboss-text">Klinik SihatSokmo</span>
+        </div>
+        <p class="screenshot-tip">Sila screenshot kad ini sebagai bukti pendaftaran</p>
       </div>
     </div>
   </div>
@@ -406,11 +550,20 @@ $('regForm').addEventListener('submit',async e=>{
       $('regForm').style.display='none';$('confirmationMessage').style.display='block';
       const early=ok && count<=10;
       $('msgLine').textContent=early?'Tahniah! Anda antara 10 peserta terawal yang mendaftar untuk program ini.':'Tahniah! Anda telah berjaya didaftarkan untuk program ini.';
+      
+      // Set name and IC for both cards
+      $('vName').textContent = data.fullName;
+      $('vIc').textContent = data.icNumber;
+      $('pName').textContent = data.fullName;
+      $('pIc').textContent = data.icNumber;
+      
       if(early){
-        $('vName').textContent=data.fullName;
-        $('vIc').textContent = data.icNumber;
-        $('vCode').textContent=genCode(ic);
         $('voucherCard').style.display='block';
+        $('participantCard').style.display='none';
+        $('vCode').textContent=genCode(ic);
+      } else {
+        $('voucherCard').style.display='none';
+        $('participantCard').style.display='block';
       }
     });
   }catch{
