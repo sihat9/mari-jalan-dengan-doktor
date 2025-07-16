@@ -59,9 +59,18 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
 .voucher-code{font-size:20px;font-weight:700;color:var(--primary);margin:10px 0;}
 .screenshot-tip{font-size:14px;color:var(--gray);}
 
-#tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000;}
+#tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000;}
 #tentatifModal .box{background:#fff;padding:30px;border-radius:10px;max-width:800px;width:90%;max-height:80vh;overflow-y:auto;}
 #closeModalBtn{display:block;margin:20px auto 0;padding:8px 24px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;}
+
+.tentatif-item{margin-bottom:15px;display:flex;}
+.tentatif-time{font-weight:600;min-width:100px;color:var(--primary);}
+.tentatif-content{flex:1;}
+.tentatif-highlight{background-color:#f0f8ff;padding:15px;border-radius:8px;margin-bottom:20px;}
+.tentatif-highlight .highlight-title{font-weight:700;color:var(--primary);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.tentatif-doctors{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;}
+.doctor-badge{background:#e6f2ff;color:var(--primary);padding:5px 10px;border-radius:15px;font-size:14px;}
+.activity-badge{background:#e6ffe6;color:#006400;padding:5px 10px;border-radius:15px;font-size:14px;margin-top:10px;display:inline-block;}
 </style>
 </head>
 <body>
@@ -97,7 +106,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
     <div class="form-group"><label>No. Kad Pengenalan:</label><input id="ic" placeholder="901231-01-1234" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" required></div>
     <div class="form-group"><label>No. Telefon:</label><div class="phone-input"><span class="prefix">6</span><input id="phone" pattern="[0-9]{9,11}" required></div></div>
     <div class="form-group"><label>Alamat:</label><textarea id="addr" rows="3" required></textarea></div>
-    <div class="form-group"><label>Email (opsyen):</label><input id="mail" type="email"></div>
+    <div class="form-group"><label>Email (optional):</label><input id="mail" type="email"></div>
     <div class="form-group checkbox-group"><input type="checkbox" id="agree" required><label for="agree">Saya akui maklumat adalah benar.</label></div>
     <button id="submitBtn" class="submit-btn" disabled>Memuat data…</button>
   </form>
@@ -105,8 +114,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   <!-- INFO BOX -->
   <div class="info-box">
     <h2>Tentatif Program</h2>
-    <p>Lihat jadual aktiviti.</p>
-    <a href="#" id="tentatifBtn" class="tentatif-link">Klik di sini</a>
+    <p>Lihat jadual aktiviti program kami.</p>
+    <a href="#" id="tentatifBtn" class="tentatif-link">Klik di sini untuk lihat butiran</a>
   </div>
 
   <!-- CONFIRMATION + VOUCHER -->
@@ -124,18 +133,94 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   <!-- MODAL TENTATIF -->
   <div id="tentatifModal">
     <div class="box">
-      <h2 style="color:var(--primary);text-align:center;margin-bottom:12px;">Tentatif Program</h2>
-      <table style="width:100%;border-collapse:collapse;">
-        <thead><tr style="background:var(--primary);color:#fff;"><th>Masa</th><th>Aktiviti</th><th>Catatan</th></tr></thead>
-        <tbody>
-          <tr><td>7:30–8:00 am</td><td>Pendaftaran</td><td>Bawa IC</td></tr>
-          <tr style="background:#f2f2f2;"><td>8:00–8:30 am</td><td>Sarapan Sihat</td><td>Dijamu</td></tr>
-          <tr><td>8:30–9:00 am</td><td>Taklimat Keselamatan</td><td>Oleh doktor</td></tr>
-          <tr style="background:#f2f2f2;"><td>9:00–11:00 am</td><td>Berjalan Santai</td><td>5 km</td></tr>
-          <tr><td>11:00–11:30 am</td><td>Pemeriksaan Kesihatan</td><td>Tensi & nadi</td></tr>
-          <tr style="background:#f2f2f2;"><td>11:30–12:00 tgh</td><td>Majlis Penutup</td><td>Hadiah early‑bird</td></tr>
-        </tbody>
-      </table>
+      <h2 style="color:var(--primary);text-align:center;margin-bottom:20px;">Tentatif Program "Berjalan Bersama Doktor"</h2>
+      
+      <div class="tentatif-highlight">
+        <div class="highlight-title">🗓 Maklumat Program</div>
+        <p><strong>Tarikh:</strong> Sabtu, 26 Julai 2025</p>
+        <p><strong>Masa:</strong> 7.30 pagi – 9.30 pagi (Aktiviti Berjalan Bersama Doktor)</p>
+        <p><strong>Lokasi:</strong> Dataran Parking Klinik SihatSokmo </p>
+      </div>
+      
+      <div style="margin-bottom:20px;">
+        <div class="tentatif-item">
+          <div class="tentatif-time">7.00 pagi</div>
+          <div class="tentatif-content">
+            <strong>Persiapan akhir & semakan logistik</strong>
+            <p>Penyediaan hadiah dan peralatan untuk aktiviti</p>
+          </div>
+        </div>
+        
+        <div class="tentatif-item">
+          <div class="tentatif-time">7.15 pagi</div>
+          <div class="tentatif-content">
+            <strong>Pendaftaran peserta</strong>
+            <p>Daftar secara walk-in (Jika ada peserta yang belum mendaftar). Disediakan air mineral dan sarapan ringan </p>
+          </div>
+        </div>
+        
+        <div class="tentatif-item">
+          <div class="tentatif-time">7.30 pagi</div>
+          <div class="tentatif-content">
+            <strong>Penerangan program</strong>
+            <p>Taklimat tentang tujuan program "Berjalan Bersama Doktor" dan faedah kesihatan</p>
+            <p>Maklumat tentang program tambahan pada hari tersebut:</p>
+            <div class="activity-badge">Kempen Derma Darah (9.00 pagi - 2.30 petang)</div>
+            <div class="activity-badge">Pemeriksaan Mata Percuma (9.00 pagi - 1.00 petang)</div>
+            <div class="activity-badge">Aktiviti Mewarna untuk Kanak-kanak</div>
+          </div>
+        </div>
+        
+        <div class="tentatif-item">
+          <div class="tentatif-time">7.40 pagi</div>
+          <div class="tentatif-content">
+            <strong>Mula aktiviti berjalan</strong>
+            <p>Sembang santai bersama doktor pakar:</p>
+            <div class="tentatif-doctors">
+              <span class="doctor-badge">👩‍⚕️ Pakar Sakit Puan</span>
+              <span class="doctor-badge">👨‍⚕️ Pakar Dietitian</span>
+              <span class="doctor-badge">👩‍⚕️ Pakar Kanak-kanak</span>
+              <span class="doctor-badge">👨‍⚕️ Pakar Perubatan Keluarga</span>
+            </div>
+            <p>Berhenti di checkpoint untuk regangan dan penerangan kesihatan</p>
+          </div>
+        </div>
+        
+        <div class="tentatif-item">
+          <div class="tentatif-time">8.40 pagi</div>
+          <div class="tentatif-content">
+            <strong>Tamat program berjalan</strong>
+            <p>Peserta berehat dan boleh menikmati minuman</p>
+          </div>
+        </div>
+        
+        <div class="tentatif-item">
+          <div class="tentatif-time">8.50 pagi</div>
+          <div class="tentatif-content">
+            <strong>Ucapan ringkas</strong>
+            <p>Wakil doktor memberikan ucapan penutup</p>
+          </div>
+        </div>
+        
+        <div class="tentatif-item">
+          <div class="tentatif-time">9.00 pagi</div>
+          <div class="tentatif-content">
+            <strong>Program tambahan bermula</strong>
+            <p>Kempen derma darah (sehingga 2.30 petang)</p>
+            <p>Pemeriksaan mata percuma (sehingga 1.00 petang)</p>
+            <p>Aktiviti mewarna untuk kanak-kanak</p>
+          </div>
+        </div>
+      </div>
+      
+      <div style="background:#f9f9f9;padding:15px;border-radius:8px;margin-top:20px;">
+        <p><strong>📌 Nota:</strong></p>
+        <p>1. Peserta dinasihatkan memakai pakaian dan kasut yang sesuai untuk berjalan</p>
+        <p>2. Bawa topi dan air minuman tambahan jika perlu</p>
+        <p>3. Aktiviti terbuka kepada semua peringkat umur</p>
+        <p>4. Kanak-kanak bawah 12 tahun perlu ditemani ibu bapa/penjaga</p>
+      </div>
+      
       <button id="closeModalBtn">Tutup</button>
     </div>
   </div>
@@ -154,10 +239,11 @@ let icSet=new Set(),count=0,ready=false;
   const auto=()=>timer=setInterval(()=>go((cur+1)%s.length),5000);
   b.forEach(btn=>btn.onclick=()=>{clearInterval(timer);go(+btn.dataset.i);auto();});auto();})();
 
-/* Modal */
-$('tentatifBtn').onclick=e=>{e.preventDefault();$('tentatifModal').style.display='flex';};
+/* Modal - automatically show on page load */
+$('tentatifModal').style.display='flex';
 $('closeModalBtn').onclick=()=>$('tentatifModal').style.display='none';
 $('tentatifModal').onclick=e=>{if(e.target===$('tentatifModal'))$('tentatifModal').style.display='none';};
+$('tentatifBtn').onclick=e=>{e.preventDefault();$('tentatifModal').style.display='flex';};
 
 /* JSONP */
 function loadInfo(cb){
