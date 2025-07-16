@@ -6,7 +6,7 @@
   <title>Pendaftaran Berjalan Bersama Doktor</title>
 
   <style>
-  /* ——— GAYA RINGKAS (sama) ——— */
+  /* ——— GAYA RINGKAS (dipendekkan) ——— */
   :root{--primary-color:#2c7be5;--secondary-color:#00d97e;--dark-color:#12263f;--gray-color:#95aac9;}
   *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
   body{background:#f5f7fa;color:var(--dark-color);line-height:1.6;}
@@ -18,7 +18,14 @@
   header h1{color:var(--primary-color);margin-bottom:10px;}
   header p{color:var(--gray-color);}
   form{background:#fff;padding:30px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.05);margin-bottom:30px;}
-  /* ... (CSS lain sama seperti sebelum) ... */
+  .form-group{margin-bottom:20px;} label{display:block;margin-bottom:8px;font-weight:500;}
+  input,textarea{width:100%;padding:12px 15px;border:1px solid #ddd;border-radius:5px;font-size:16px;}
+  .phone-input{display:flex;} .phone-input .prefix{background:#f0f2f5;padding:12px 10px;border:1px solid #ddd;border-right:none;border-radius:5px 0 0 5px;}
+  .checkbox-group{display:flex;align-items:center;} .checkbox-group input{width:auto;margin-right:10px;}
+  .submit-btn{background:var(--primary-color);color:#fff;border:none;padding:12px 25px;font-size:16px;border-radius:5px;width:100%;font-weight:500;transition:background .3s;}
+  .submit-btn[disabled]{background:#9bbdff;cursor:not-allowed;}
+  #confirmationMessage{background:#e8f4ff;padding:20px;border-radius:5px;margin-bottom:20px;display:none;}
+  #confirmationMessage h2{color:var(--primary-color);margin-bottom:10px;}
   </style>
 </head>
 <body>
@@ -27,7 +34,6 @@
   <!-- ---------- HEADER ---------- -->
   <header>
     <div class="logo">
-      <!-- GANTI URL PLACEHOLDER -->
       <img src="https://placehold.co/80x80/2c7be5/ffffff?text=KSS" alt="Logo Klinik">
       <span class="logo-text">Klinik SihatSokmo</span>
     </div>
@@ -37,20 +43,20 @@
 
   <!-- ---------- BORANG ---------- -->
   <form id="registrationForm">
-    <!-- (semua elemen borang sama) -->
+    <div class="form-group"><label for="fullName">Nama Penuh Peserta:</label><input type="text" id="fullName" required></div>
+    <div class="form-group"><label for="icNumber">No. Kad Pengenalan:</label><input type="text" id="icNumber" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" placeholder="901231-01-1234" required></div>
+    <div class="form-group"><label for="phoneNumber">No. Telefon:</label>
+      <div class="phone-input"><span class="prefix">6</span><input type="tel" id="phoneNumber" pattern="[0-9]{9,11}" placeholder="0123456789" required></div>
+    </div>
+    <div class="form-group"><label for="address">Alamat:</label><textarea id="address" rows="3" required></textarea></div>
+    <div class="form-group"><label for="email">Email (optional):</label><input type="email" id="email"></div>
+    <div class="form-group checkbox-group"><input type="checkbox" id="agreeTerms" required><label for="agreeTerms">Saya mengakui bahawa maklumat yang diberikan adalah benar.</label></div>
     <button type="submit" id="submitBtn" class="submit-btn" disabled>Memuat data…</button>
   </form>
 
-  <!-- ---------- INFO BOX ---------- -->
-  <div class="info-box">
-    <h2>Tentatif Program</h2>
-    <p>Lihat jadual aktiviti untuk hari program.</p>
-    <a href="#" id="tentatifBtn" class="tentatif-link">Klik di sini untuk lihat tentatif</a>
-  </div>
-
   <!-- ---------- CONFIRMATION ---------- -->
-  <div id="confirmationMessage" style="display:none;background:#e8f4ff;padding:20px;border-radius:5px;">
-    <h2 style="color:var(--primary-color);">Pendaftaran Berjaya!</h2>
+  <div id="confirmationMessage">
+    <h2>Pendaftaran Berjaya!</h2>
     <p id="earlyBirdMessage"></p>
     <p>Sila hadir ke kaunter pendaftaran Klinik SihatSokmo pada hari program dengan membawa kad pengenalan anda.</p>
   </div>
@@ -59,20 +65,20 @@
 
 <!-- ============ JAVASCRIPT ============ -->
 <script>
+document.addEventListener('DOMContentLoaded',()=>{
+
+/* ---------- Konfigurasi ---------- */
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwRSq4IDDG59UimVrhA226--hAjbJ0tWocnKvoglY706Bvj6R3jOei3iG8IqtpIUwBC/exec';
 let icSet=new Set(),count=0,dataReady=false;
 const $=id=>document.getElementById(id);
 
-/* ---------- Ambil data ---------- */
+/* ---------- Muat data JSONP ---------- */
 function loadSheetInfo(cb){
   const fn='cb_'+Date.now();
   window[fn]=d=>{
-    icSet=new Set(d.icList||[]);
-    count=d.count||0;
-    dataReady=true;
-    $('submitBtn').disabled=false; $('submitBtn').textContent='Daftar Sekarang';
-    delete window[fn];document.body.removeChild(tag);
-    cb&&cb();
+    icSet=new Set(d.icList||[]);count=d.count||0;
+    dataReady=true; $('submitBtn').disabled=false; $('submitBtn').textContent='Daftar Sekarang';
+    delete window[fn]; tag.remove(); if(cb)cb();
   };
   const tag=document.createElement('script');
   tag.src=`${SCRIPT_URL}?callback=${fn}`;document.body.appendChild(tag);
@@ -81,34 +87,39 @@ function loadSheetInfo(cb){
 /* ---------- Hantar Borang ---------- */
 $('registrationForm').addEventListener('submit',async e=>{
   e.preventDefault();
-  if(!dataReady)return alert('Sedang memuat data, sila tunggu.');
+  if(!dataReady)return alert('Sistem masih memuat data.');
   const ic=$('icNumber').value.trim();
-  if(icSet.has(ic))return alert('IC sudah didaftarkan.');
+  if(icSet.has(ic))return alert('IC ini telah didaftarkan.');
   if(!$('agreeTerms').checked)return alert('Sila setujui terma.');
+
   const data={fullName:$('fullName').value.trim(),icNumber:ic,phoneNumber:'6'+$('phoneNumber').value.trim(),address:$('address').value.trim(),email:$('email').value.trim()||'N/A',timestamp:new Date().toISOString()};
   try{
     $('submitBtn').disabled=true;$('submitBtn').textContent='Menghantar…';
     await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    loadSheetInfo(()=>{ // kemas kini jumlah sebenar
-      const msg=count<=10?'Tahniah! Anda antara 10 peserta terawal yang layak hadiah!':'Tahniah! Anda telah berjaya didaftarkan.';
+    loadSheetInfo(()=>{ // muat semula jumlah
+      const msg=(count<=10)?'Tahniah! Anda antara 10 peserta terawal yang layak hadiah!':'Tahniah! Anda telah berjaya didaftarkan.';
       $('earlyBirdMessage').textContent=msg;
       $('registrationForm').style.display='none';
       $('confirmationMessage').style.display='block';
     });
-  }catch{alert('Gagal menghantar.');$('submitBtn').disabled=false;$('submitBtn').textContent='Daftar Sekarang';}
+  }catch{alert('Gagal menghantar.');$('submitBtn').disabled=false;$('submitBtn').textContent='Daftar Sekarang';}
 });
 
-/* ---------- Format IC & Telefon ---------- */
-$('icNumber').oninput=e=>{
+/* ---------- Format input ---------- */
+$('icNumber').addEventListener('input',e=>{
   let v=e.target.value.replace(/\D/g,'');
   if(v.length>6)v=v.slice(0,6)+'-'+v.slice(6);
   if(v.length>9)v=v.slice(0,9)+'-'+v.slice(9);
   e.target.value=v.slice(0,14);
-};
-$('phoneNumber').oninput=e=>e.target.value=e.target.value.replace(/\D/g,'');
+});
+$('phoneNumber').addEventListener('input',e=>{
+  e.target.value=e.target.value.replace(/\D/g,'');
+});
 
 /* ---------- Mula ---------- */
 loadSheetInfo();
+
+}); /* /DOMContentLoaded */
 </script>
 </body>
 </html>
