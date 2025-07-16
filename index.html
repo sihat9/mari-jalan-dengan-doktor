@@ -5,32 +5,37 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Pendaftaran Berjalan Bersama Doktor</title>
 
-<!-- --------------- GAYA --------------- -->
+<!-- ==== GAYA ==== -->
 <style>
 :root{
-  --primary:#2c7be5; --secondary:#00d97e;
-  --dark:#12263f;    --gray:#95aac9;
+  --primary:#2c7be5;
+  --secondary:#00d97e;
+  --dark:#12263f;
+  --gray:#95aac9;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
-body{background:#f5f7fa;color:var(--dark);line-height:1.6;}
-.container{max-width:800px;margin:auto;padding:20px;}
-/* Header */
+/* Latar belakang: ganti URL di bawah */
+body{
+  background:url('← GANTI_DI_SINI/url-latar.jpg →') center/cover fixed no-repeat;
+  color:var(--dark);line-height:1.6;position:relative;
+}
+body::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.85);z-index:-1;}
+.container{max-width:800px;margin:auto;padding:20px;position:relative;}
+
 header{text-align:center;margin-bottom:30px;}
 header .logo{display:flex;justify-content:center;align-items:center;gap:15px;margin-bottom:15px;}
-header .logo img{max-width:80px;}
+header .logo img{max-width:80px;height:auto;}
 header .logo-text{font-size:24px;font-weight:700;color:var(--primary);}
 header h1{color:var(--primary);margin-bottom:10px;}
 header p{color:var(--gray);}
 
-/* Slider */
-.slider-container{width:100%;margin-bottom:30px;border-radius:10px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.1);}
+.slider-container{width:100%;border-radius:10px;overflow:hidden;margin-bottom:30px;box-shadow:0 4px 12px rgba(0,0,0,.1);}
 .slider{position:relative;height:280px;}
 .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s;}
 .slide.active{opacity:1;}
 .slide-nav{text-align:center;margin-top:10px;}
 .slide-nav button{background:var(--primary);border:none;color:#fff;padding:4px 10px;margin:0 4px;border-radius:3px;cursor:pointer;}
 
-/* Form */
 form{background:#fff;padding:30px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.05);margin-bottom:30px;}
 .form-group{margin-bottom:20px;}label{display:block;margin-bottom:6px;font-weight:500;}
 input,textarea{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:6px;font-size:15px;}
@@ -41,32 +46,32 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
 .submit-btn{background:var(--primary);color:#fff;border:none;padding:12px;font-size:16px;border-radius:6px;width:100%;font-weight:600;cursor:pointer;}
 .submit-btn[disabled]{background:#9cbcff;cursor:not-allowed;}
 
-/* Info box */
 .info-box{background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.05);margin-bottom:30px;}
 .info-box h2{color:var(--primary);margin-bottom:8px;}
 .tentatif-link{color:var(--primary);font-weight:500;text-decoration:none;}
 .tentatif-link:hover{text-decoration:underline;}
 
-/* Modal Tentatif */
+#confirmationMessage{display:none;margin-bottom:30px;}
+#confirmationMessage h2{color:var(--primary);margin-bottom:6px;}
+
+#voucherCard{display:none;margin-top:20px;padding:20px;border:2px dashed var(--secondary);border-radius:10px;text-align:center;background:#fff;}
+#voucherCard h3{color:var(--secondary);margin-bottom:8px;}
+.voucher-code{font-size:20px;font-weight:700;color:var(--primary);margin:10px 0;}
+.screenshot-tip{font-size:14px;color:var(--gray);}
+
 #tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000;}
 #tentatifModal .box{background:#fff;padding:30px;border-radius:10px;max-width:800px;width:90%;max-height:80vh;overflow-y:auto;}
 #closeModalBtn{display:block;margin:20px auto 0;padding:8px 24px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;}
-
-/* Confirmation & Baucar */
-#confirmationMessage{display:none;margin-bottom:30px;}
-#confirmationMessage h2{color:var(--primary);margin-bottom:6px;}
-#voucherCard{display:none;margin-top:20px;padding:20px;border:2px dashed var(--secondary);border-radius:10px;text-align:center;position:relative;background:#fff;}
-#voucherCard h3{color:var(--secondary);margin-bottom:8px;}
-.voucher-code{font-size:20px;font-weight:700;margin:10px 0;color:var(--primary);}
-.screenshot-tip{font-size:14px;color:var(--gray);}
 </style>
 </head>
 <body>
 <div class="container">
+
   <!-- HEADER -->
   <header>
     <div class="logo">
-      <img src="https://placehold.co/80x80/2c7be5/ffffff?text=KSS" alt="Logo">
+      <!-- GANTI logo sebenar klinik -->
+      <img src="← GANTI_DI_SINI/logo-klinik.png →" alt="Logo Klinik">
       <span class="logo-text">Klinik SihatSokmo</span>
     </div>
     <h1>Pendaftaran Program "Berjalan Bersama Doktor"</h1>
@@ -76,32 +81,31 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   <!-- SLIDER -->
   <div class="slider-container">
     <div class="slider">
-      <div class="slide active" style="background-image:url('https://placehold.co/800x280/00b894/ffffff?text=Poster+1');"></div>
-      <div class="slide"        style="background-image:url('https://placehold.co/800x280/ff7675/ffffff?text=Poster+2');"></div>
-      <div class="slide"        style="background-image:url('https://placehold.co/800x280/74b9ff/ffffff?text=Poster+3');"></div>
+      <!-- GANTI 3 poster -->
+      <div class="slide active" style="background-image:url('← GANTI_DI_SINI/poster-1.jpg →');"></div>
+      <div class="slide"        style="background-image:url('← GANTI_DI_SINI/poster-2.jpg →');"></div>
+      <div class="slide"        style="background-image:url('← GANTI_DI_SINI/poster-3.jpg →');"></div>
     </div>
     <div class="slide-nav">
-      <button class="nav-btn" data-i="0">1</button>
-      <button class="nav-btn" data-i="1">2</button>
-      <button class="nav-btn" data-i="2">3</button>
+      <button class="nav-btn" data-i="0">1</button><button class="nav-btn" data-i="1">2</button><button class="nav-btn" data-i="2">3</button>
     </div>
   </div>
 
-  <!-- FORM -->
+  <!-- BORANG -->
   <form id="regForm">
-    <div class="form-group"><label for="fullName">Nama Penuh:</label><input id="fullName" required></div>
-    <div class="form-group"><label for="ic">No. Kad Pengenalan:</label><input id="ic" placeholder="901231-01-1234" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" required></div>
-    <div class="form-group"><label>No. Telefon:</label><div class="phone-input"><span class="prefix">6</span><input id="phone" pattern="[0-9]{9,11}" placeholder="0123456789" required></div></div>
+    <div class="form-group"><label>Nama Penuh:</label><input id="fullName" required></div>
+    <div class="form-group"><label>No. Kad Pengenalan:</label><input id="ic" placeholder="901231-01-1234" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}" required></div>
+    <div class="form-group"><label>No. Telefon:</label><div class="phone-input"><span class="prefix">6</span><input id="phone" pattern="[0-9]{9,11}" required></div></div>
     <div class="form-group"><label>Alamat:</label><textarea id="addr" rows="3" required></textarea></div>
     <div class="form-group"><label>Email (opsyen):</label><input id="mail" type="email"></div>
-    <div class="form-group checkbox-group"><input type="checkbox" id="agree" required><label for="agree">Saya setuju maklumat di atas adalah benar.</label></div>
+    <div class="form-group checkbox-group"><input type="checkbox" id="agree" required><label for="agree">Saya akui maklumat adalah benar.</label></div>
     <button id="submitBtn" class="submit-btn" disabled>Memuat data…</button>
   </form>
 
   <!-- INFO BOX -->
   <div class="info-box">
     <h2>Tentatif Program</h2>
-    <p>Lihat jadual aktiviti penuh.</p>
+    <p>Lihat jadual aktiviti.</p>
     <a href="#" id="tentatifBtn" class="tentatif-link">Klik di sini</a>
   </div>
 
@@ -109,7 +113,6 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   <div id="confirmationMessage">
     <h2>Pendaftaran Berjaya!</h2>
     <p id="msgLine"></p>
-
     <div id="voucherCard">
       <h3>BAUCAR HADIAH 10 TERAWAL</h3>
       <p>Nama: <span id="vName"></span></p>
@@ -128,7 +131,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
           <tr><td>7:30–8:00 am</td><td>Pendaftaran</td><td>Bawa IC</td></tr>
           <tr style="background:#f2f2f2;"><td>8:00–8:30 am</td><td>Sarapan Sihat</td><td>Dijamu</td></tr>
           <tr><td>8:30–9:00 am</td><td>Taklimat Keselamatan</td><td>Oleh doktor</td></tr>
-          <tr style="background:#f2f2f2;"><td>9:00–11:00 am</td><td>Berjalan Santai</td><td>5 km</td></tr>
+          <tr style="background:#f2f2f2;"><td>9:00–11:00 am</td><td>Berjalan Santai</td><td>5 km</td></tr>
           <tr><td>11:00–11:30 am</td><td>Pemeriksaan Kesihatan</td><td>Tensi & nadi</td></tr>
           <tr style="background:#f2f2f2;"><td>11:30–12:00 tgh</td><td>Majlis Penutup</td><td>Hadiah early‑bird</td></tr>
         </tbody>
@@ -138,7 +141,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   </div>
 </div>
 
-<!-- --------------- SCRIPT --------------- -->
+<!-- ==== SCRIPT ==== -->
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwRSq4IDDG59UimVrhA226--hAjbJ0tWocnKvoglY706Bvj6R3jOei3iG8IqtpIUwBC/exec';
@@ -146,28 +149,28 @@ const $=id=>document.getElementById(id);
 let icSet=new Set(),count=0,ready=false;
 
 /* Slider */
-(()=>{const slides=document.querySelectorAll('.slide'),nav=document.querySelectorAll('.nav-btn');let cur=0,timer;
-  const go=i=>{slides[cur].classList.remove('active');cur=i;slides[cur].classList.add('active');};
-  const auto=()=>timer=setInterval(()=>go((cur+1)%slides.length),5000);
-  nav.forEach(b=>b.onclick=()=>{clearInterval(timer);go(+b.dataset.i);auto();});auto();})();
+(()=>{const s=document.querySelectorAll('.slide'),b=document.querySelectorAll('.nav-btn');let cur=0,timer;
+  const go=i=>{s[cur].classList.remove('active');cur=i;s[cur].classList.add('active');};
+  const auto=()=>timer=setInterval(()=>go((cur+1)%s.length),5000);
+  b.forEach(btn=>btn.onclick=()=>{clearInterval(timer);go(+btn.dataset.i);auto();});auto();})();
 
-/* Tentatif modal */
+/* Modal */
 $('tentatifBtn').onclick=e=>{e.preventDefault();$('tentatifModal').style.display='flex';};
 $('closeModalBtn').onclick=()=>$('tentatifModal').style.display='none';
 $('tentatifModal').onclick=e=>{if(e.target===$('tentatifModal'))$('tentatifModal').style.display='none';};
 
-/* Load Sheet info (JSONP) */
+/* JSONP */
 function loadInfo(cb){
-  const fn='cb'+Date.now();const scr=document.createElement('script');
-  window[fn]=d=>{icSet=new Set(d.icList||[]);count=d.count||0;ready=true;$('submitBtn').disabled=false;$('submitBtn').textContent='Daftar Sekarang';clean();cb&&cb(true);};
-  function clean(){delete window[fn];scr.remove();}
-  scr.src=`${SCRIPT_URL}?callback=${fn}`;scr.onerror=()=>{clean();cb&&cb(false);} ;document.body.appendChild(scr);
+  const fn='cb'+Date.now(),tag=document.createElement('script');
+  window[fn]=d=>{icSet=new Set(d.icList||[]);count=d.count||0;ready=true;$('submitBtn').disabled=false;$('submitBtn').textContent='Daftar Sekarang';clean();cb&&cb(true);};
+  const clean=()=>{delete window[fn];tag.remove();};
+  tag.src=`${SCRIPT_URL}?callback=${fn}`;tag.onerror=()=>{clean();cb&&cb(false);};document.body.appendChild(tag);
   setTimeout(()=>{if(!ready){cb&&cb(false);}},5000);
 }
 loadInfo();
 
-/* Helper generate voucher code */
-function genCode(ic){return ic.replace(/\D/g,'').slice(-4)+'-'+Date.now().toString().slice(-6);}
+/* Util */
+const genCode=ic=>ic.replace(/\D/g,'').slice(-4)+'-'+Date.now().toString().slice(-6);
 
 /* Submit */
 $('regForm').addEventListener('submit',async e=>{
@@ -175,33 +178,28 @@ $('regForm').addEventListener('submit',async e=>{
   const ic=$('ic').value.trim();if(icSet.has(ic))return alert('IC sudah didaftarkan.');
   if(!$('agree').checked)return alert('Sila setujui terma.');
 
-  const payload={fullName:$('fullName').value.trim(),icNumber:ic,phoneNumber:'6'+$('phone').value.trim(),address:$('addr').value.trim(),email:$('mail').value.trim()||'N/A',timestamp:new Date().toISOString()};
+  const data={fullName:$('fullName').value.trim(),icNumber:ic,phoneNumber:'6'+$('phone').value.trim(),address:$('addr').value.trim(),email:$('mail').value.trim()||'N/A',timestamp:new Date().toISOString()};
   $('submitBtn').disabled=true;$('submitBtn').textContent='Menghantar…';
 
   try{
-    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    /* muat semula kiraan */
+    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     loadInfo(ok=>{
-      const early=ok && count<=10;
-      $('msgLine').textContent= early ? 'Tahniah! Anda antara 10 peserta terawal.' : 'Tahniah! Anda telah berjaya didaftarkan.';
       $('regForm').style.display='none';$('confirmationMessage').style.display='block';
-      if(early){
-        $('vName').textContent=payload.fullName;
-        $('vCode').textContent=genCode(ic);
-        $('voucherCard').style.display='block';
-      }
+      const early=ok && count<=10;
+      $('msgLine').textContent=early?'Tahniah! Anda antara 10 peserta terawal.':'Tahniah! Anda telah berjaya didaftarkan.';
+      if(early){$('vName').textContent=data.fullName;$('vCode').textContent=genCode(ic);$('voucherCard').style.display='block';}
     });
-  }catch{alert('Gagal menghantar.');$('submitBtn').disabled=false;$('submitBtn').textContent='Daftar Sekarang';}
+  }catch{alert('Gagal menghantar.');$('submitBtn').disabled=false;$('submitBtn').textContent='Daftar Sekarang';}
 });
 
 /* Input format */
-$('ic').oninput=e=>{
+$('ic').addEventListener('input',e=>{
   let v=e.target.value.replace(/\D/g,'');
   if(v.length>6)v=v.slice(0,6)+'-'+v.slice(6);
   if(v.length>9)v=v.slice(0,9)+'-'+v.slice(9);
   e.target.value=v.slice(0,14);
-};
-$('phone').oninput=e=>e.target.value=e.target.value.replace(/\D/g,'');
+});
+$('phone').addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,''));
 });
 </script>
 </body>
