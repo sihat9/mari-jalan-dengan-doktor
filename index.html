@@ -54,10 +54,126 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
 #confirmationMessage{display:none;margin-bottom:30px;}
 #confirmationMessage h2{color:var(--primary);margin-bottom:6px;}
 
-#voucherCard{display:none;margin-top:20px;padding:20px;border:2px dashed var(--secondary);border-radius:10px;text-align:center;background:#fff;}
-#voucherCard h3{color:var(--secondary);margin-bottom:8px;}
-.voucher-code{font-size:20px;font-weight:700;color:var(--primary);margin:10px 0;}
-.screenshot-tip{font-size:14px;color:var(--gray);}
+/* Loading Spinner */
+.loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Bank Card Style Voucher */
+#voucherCard {
+  display: none;
+  margin-top: 20px;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: left;
+  background: linear-gradient(135deg, #2c7be5 0%, #00d97e 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  min-height: 200px;
+}
+
+#voucherCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/sihat9/mari-jalan-dengan-doktor/main/img/poster1.png') center/cover;
+  opacity: 0.15;
+}
+
+#voucherCard .voucher-content {
+  position: relative;
+  z-index: 2;
+}
+
+#voucherCard .voucher-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#voucherCard .voucher-header img {
+  max-width: 60px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+#voucherCard .chip {
+  width: 40px;
+  height: 30px;
+  background: #ffd700;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+#voucherCard .chip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, 
+    rgba(255,255,255,0.3) 0%, 
+    rgba(255,255,255,0.1) 50%, 
+    rgba(255,255,255,0.3) 100%);
+}
+
+#voucherCard h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+#voucherCard .voucher-details {
+  margin: 20px 0;
+}
+
+#voucherCard .voucher-code {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 15px 0;
+  background: rgba(0,0,0,0.2);
+  padding: 10px;
+  border-radius: 6px;
+  display: inline-block;
+  font-family: monospace;
+}
+
+#voucherCard .voucher-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.screenshot-tip {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 10px;
+  font-style: italic;
+  text-align: center;
+}
 
 #tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000;}
 #tentatifModal .box{background:#fff;padding:30px;border-radius:10px;max-width:800px;width:90%;max-height:80vh;overflow-y:auto;}
@@ -108,7 +224,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
     <div class="form-group"><label>Alamat:</label><textarea id="addr" rows="3" required></textarea></div>
     <div class="form-group"><label>Email (optional):</label><input id="mail" type="email"></div>
     <div class="form-group checkbox-group"><input type="checkbox" id="agree" required><label for="agree">Saya akui maklumat ini adalah benar.</label></div>
-    <button id="submitBtn" class="submit-btn" disabled>Memuat data…</button>
+    <button id="submitBtn" class="submit-btn" disabled><span id="submitText">Memuat data…</span></button>
   </form>
 
   <!-- INFO BOX -->
@@ -123,10 +239,24 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
     <h2>Pendaftaran Berjaya!</h2>
     <p id="msgLine"></p>
     <div id="voucherCard">
-      <h3>BAUCAR HADIAH 10 TERAWAL</h3>
-      <p>Nama: <span id="vName"></span></p>
-      <p class="voucher-code" id="vCode"></p>
-      <p class="screenshot-tip">Sila screenshot kad ini & tunjuk di kaunter penebusan.</p>
+      <div class="voucher-content">
+        <div class="voucher-header">
+          <div class="chip"></div>
+          <img src="https://github.com/sihat9/mari-jalan-dengan-doktor/blob/main/img/logo-kss.png?raw=true" alt="Logo Klinik">
+        </div>
+        <div class="voucher-details">
+          <h3>BAUCAR HADIAH 10 TERAWAL</h3>
+          <p><strong>Nama:</strong> <span id="vName"></span></p>
+          <p><strong>No. IC:</strong> <span id="vIc"></span></p>
+          <p class="voucher-code" id="vCode"></p>
+          <p><strong>Tarikh Tamat:</strong> 31/12/2025</p>
+        </div>
+        <div class="voucher-footer">
+          <span>Program Mari Jalan Dengan Doktor</span>
+          <span>Klinik SihatSokmo</span>
+        </div>
+        <p class="screenshot-tip">Sila screenshot kad ini & tunjuk di kaunter penebusan</p>
+      </div>
     </div>
   </div>
 
@@ -248,7 +378,7 @@ $('tentatifBtn').onclick=e=>{e.preventDefault();$('tentatifModal').style.display
 /* JSONP */
 function loadInfo(cb){
   const fn='cb'+Date.now(),tag=document.createElement('script');
-  window[fn]=d=>{icSet=new Set(d.icList||[]);count=d.count||0;ready=true;$('submitBtn').disabled=false;$('submitBtn').textContent='Daftar Sekarang';clean();cb&&cb(true);};
+  window[fn]=d=>{icSet=new Set(d.icList||[]);count=d.count||0;ready=true;$('submitBtn').disabled=false;$('submitText').textContent='Daftar Sekarang';clean();cb&&cb(true);};
   const clean=()=>{delete window[fn];tag.remove();};
   tag.src=`${SCRIPT_URL}?callback=${fn}`;tag.onerror=()=>{clean();cb&&cb(false);};document.body.appendChild(tag);
   setTimeout(()=>{if(!ready){cb&&cb(false);}},5000);
@@ -265,17 +395,29 @@ $('regForm').addEventListener('submit',async e=>{
   if(!$('agree').checked)return alert('Sila setujui terma.');
 
   const data={fullName:$('fullName').value.trim(),icNumber:ic,phoneNumber:'6'+$('phone').value.trim(),address:$('addr').value.trim(),email:$('mail').value.trim()||'N/A',timestamp:new Date().toISOString()};
-  $('submitBtn').disabled=true;$('submitBtn').textContent='Menghantar…';
-
+  
+  // Show loading spinner
+  $('submitBtn').disabled=true;
+  $('submitText').innerHTML = '<span class="loader"></span> Sedang memproses...';
+  
   try{
     await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     loadInfo(ok=>{
       $('regForm').style.display='none';$('confirmationMessage').style.display='block';
       const early=ok && count<=10;
       $('msgLine').textContent=early?'Tahniah! Anda antara 10 peserta terawal yang mendaftar untuk program ini.':'Tahniah! Anda telah berjaya didaftarkan untuk program ini.';
-      if(early){$('vName').textContent=data.fullName;$('vCode').textContent=genCode(ic);$('voucherCard').style.display='block';}
+      if(early){
+        $('vName').textContent=data.fullName;
+        $('vIc').textContent = data.icNumber;
+        $('vCode').textContent=genCode(ic);
+        $('voucherCard').style.display='block';
+      }
     });
-  }catch{alert('Gagal menghantar.');$('submitBtn').disabled=false;$('submitBtn').textContent='Daftar Sekarang';}
+  }catch{
+    alert('Gagal menghantar.');
+    $('submitBtn').disabled=false;
+    $('submitText').textContent='Daftar Sekarang';
+  }
 });
 
 /* Input format */
