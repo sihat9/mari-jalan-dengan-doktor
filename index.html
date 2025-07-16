@@ -8,10 +8,13 @@
         /* ============ GAYA ASAL TIDAK DIUSIK ============ */
         :root{--primary-color:#2c7be5;--secondary-color:#00d97e;--danger-color:#e63757;--light-color:#f9fafd;--dark-color:#12263f;--gray-color:#95aac9;}
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-        body{background-color:#f5f7fa;color:var(--dark-color);line-height:1.6;}
-        .container{max-width:800px;margin:0 auto;padding:20px;}
+        body{background-color:#f5f7fa;color:var(--dark-color);line-height:1.6;background-image:url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2070&auto=format&fit=crop');background-size:cover;background-attachment:fixed;background-position:center;position:relative;}
+        body::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.85);z-index:-1;}
+        .container{max-width:800px;margin:0 auto;padding:20px;position:relative;}
         header{text-align:center;margin-bottom:30px;}
-        header .logo{margin-bottom:15px;max-width:150px;height:auto;}
+        header .logo{display:flex;align-items:center;justify-content:center;margin-bottom:15px;gap:15px;}
+        header .logo img{max-width:80px;height:auto;}
+        header .logo-text{font-size:24px;font-weight:700;color:var(--primary-color);}
         header h1{color:var(--primary-color);margin-bottom:10px;}
         header p{color:var(--gray-color);}
         form{background:#fff;padding:30px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.05);margin-bottom:30px;}
@@ -38,18 +41,54 @@
         .progress-bar{background:#f0f2f5;height:10px;border-radius:5px;overflow:hidden;}
         .progress{background:var(--secondary-color);height:100%;width:0%;transition:width .5s;}
         footer{text-align:center;margin-top:30px;color:var(--gray-color);font-size:14px;}
-        @media(max-width:600px){.container{padding:15px;}form{padding:20px;}}
+        
+        /* ============ GAYA BARU UNTUK SLIDER & TENTATIF ============ */
+        .slider-container{width:100%;margin:0 auto 30px;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.1);}
+        .slider{position:relative;height:300px;}
+        .slide{position:absolute;width:100%;height:100%;opacity:0;transition:opacity 1s ease-in-out;background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#fff;}
+        .slide.active{opacity:1;}
+        .slide-nav{text-align:center;margin-top:10px;}
+        .slide-nav button{background:var(--primary-color);color:#fff;border:none;padding:5px 10px;margin:0 5px;border-radius:3px;cursor:pointer;}
+        
+        .tentatif-table{width:100%;border-collapse:collapse;margin:20px 0;}
+        .tentatif-table th, .tentatif-table td{padding:12px;text-align:left;border-bottom:1px solid #ddd;}
+        .tentatif-table th{background-color:var(--primary-color);color:white;}
+        .tentatif-table tr:nth-child(even){background-color:#f2f2f2;}
+        .tentatif-table tr:hover{background-color:#e6f2ff;}
+        
+        @media(max-width:600px){
+            .container{padding:15px;}
+            form{padding:20px;}
+            .slider{height:200px;}
+        }
     </style>
 </head>
 <body>
 <div class="container">
 <header>
-    <div class="logo">Klinik SihatSokmo</div>
+    <div class="logo">
+        <img src="https://via.placeholder.com/80x80?text=KSS" alt="Logo Klinik SihatSokmo">
+        <span class="logo-text">Klinik SihatSokmo</span>
+    </div>
     <h1>Pendaftaran Program "Berjalan Bersama Doktor"</h1>
     <p>10 peserta terawal berpeluang menebus hadiah istimewa!</p>
 </header>
 
 <main>
+    <!-- ============ SLIDER POSTER ============ -->
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide active" style="background-image:url('https://via.placeholder.com/800x300?text=Poster+1');"></div>
+            <div class="slide" style="background-image:url('https://via.placeholder.com/800x300?text=Poster+2');"></div>
+            <div class="slide" style="background-image:url('https://via.placeholder.com/800x300?text=Poster+3');"></div>
+        </div>
+        <div class="slide-nav">
+            <button class="slide-btn" data-index="0">1</button>
+            <button class="slide-btn" data-index="1">2</button>
+            <button class="slide-btn" data-index="2">3</button>
+        </div>
+    </div>
+
     <!-- ============ BORANG ASAL ============ -->
     <form id="registrationForm">
         <div class="form-group">
@@ -103,11 +142,51 @@
         </div>
     </div>
 
-    <!-- === Modal Tentatif (kod asal dipendekkan untuk penjelasan) === -->
+    <!-- === Modal Tentatif === -->
     <div id="tentatifModal" class="hidden" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:flex;justify-content:center;align-items:center;z-index:1000;">
         <div style="background:#fff;padding:30px;border-radius:10px;max-width:800px;width:90%;max-height:80vh;overflow-y:auto;">
-            <h2 style="color:#2c7be5;margin-bottom:20px;text-align:center;">Tentatif Program</h2>
-            <!-- (jadual aktiviti kekal seperti asal) -->
+            <h2 style="color:#2c7be5;margin-bottom:20px;text-align:center;">Tentatif Program "Berjalan Bersama Doktor"</h2>
+            <table class="tentatif-table">
+                <thead>
+                    <tr>
+                        <th>Masa</th>
+                        <th>Aktiviti</th>
+                        <th>Catatan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>7:30 - 8:00 pagi</td>
+                        <td>Pendaftaran Peserta</td>
+                        <td>Bawa kad pengenalan</td>
+                    </tr>
+                    <tr>
+                        <td>8:00 - 8:30 pagi</td>
+                        <td>Sarapan pagi</td>
+                        <td>Menu sihat disediakan</td>
+                    </tr>
+                    <tr>
+                        <td>8:30 - 9:00 pagi</td>
+                        <td>Taklimat keselamatan</td>
+                        <td>Oleh doktor pengiring</td>
+                    </tr>
+                    <tr>
+                        <td>9:00 - 11:00 pagi</td>
+                        <td>Aktiviti berjalan</td>
+                        <td>Jarak 5km</td>
+                    </tr>
+                    <tr>
+                        <td>11:00 - 11:30 pagi</td>
+                        <td>Sesi pemeriksaan kesihatan ringkas</td>
+                        <td>Tekanan darah & nadi</td>
+                    </tr>
+                    <tr>
+                        <td>11:30 - 12:00 tengahari</td>
+                        <td>Majlis penutup & penyampaian hadiah</td>
+                        <td>10 peserta terawal</td>
+                    </tr>
+                </tbody>
+            </table>
             <button id="closeModalBtn" style="display:block;margin:20px auto 0;padding:8px 20px;background:#2c7be5;color:#fff;border:none;border-radius:5px;cursor:pointer;">Tutup</button>
         </div>
     </div>
@@ -131,11 +210,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const tentatifModal     = document.getElementById('tentatifModal');
     const closeModalBtn     = document.getElementById('closeModalBtn');
 
+    // Slider elements
+    const slides            = document.querySelectorAll('.slide');
+    const slideButtons      = document.querySelectorAll('.slide-btn');
+    let currentSlide        = 0;
+    let slideInterval;
+
     // Config
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRSq4IDDG59UimVrhA226--hAjbJ0tWocnKvoglY706Bvj6R3jOei3iG8IqtpIUwBC/exec';
     const MAX_EARLY_BIRDS   = 10;
     let   registeredCount   = 0;   // tempatan
 
+    // ===== Slider Functionality =====
+    function startSlider() {
+        slideInterval = setInterval(() => {
+            goToSlide((currentSlide + 1) % slides.length);
+        }, 5000); // Tukar slide setiap 5 saat
+    }
+
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        slides[index].classList.add('active');
+        currentSlide = index;
+    }
+
+    function stopSlider() {
+        clearInterval(slideInterval);
+    }
+
+    // Initialize slider
+    startSlider();
+
+    // Add event listeners for manual navigation
+    slideButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            stopSlider();
+            goToSlide(parseInt(e.target.dataset.index));
+            startSlider();
+        });
+    });
+
+    // Pause slider on hover
+    document.querySelector('.slider').addEventListener('mouseenter', stopSlider);
+    document.querySelector('.slider').addEventListener('mouseleave', startSlider);
+
+    // ===== Original Functions =====
     const getTimestamp = () => {
         const n = new Date();
         return `${n.toISOString().split('T')[0]} ${n.toTimeString().split(' ')[0]}`;
