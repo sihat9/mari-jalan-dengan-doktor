@@ -362,20 +362,35 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
 <body>
 <div class="container">
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      <!-- GANTI logo sebenar klinik -->
-      <img src="https://github.com/sihat9/mari-jalan-dengan-doktor/blob/main/img/logo-kss.png?raw=true" alt="Logo Klinik">
-      <span class="logo-text">Klinik SihatSokmo</span>
-    </div>
-    <div class="countdown-container">
-      <div class="countdown-title">PROGRAM INI AKAN BERMULA DALAM</div>
-      <div class="countdown-timer"><span id="countdown-days" class="countdown-days">00</span> Hari <span id="countdown-hours">00</span>:<span id="countdown-minutes">00</span>:<span id="countdown-seconds">00</span> <span class="countdown-lagi">Lagi!</span></div>
-    </div>
-    <h1>Pendaftaran Program "Mari Jalan Dengan Doktor"</h1>
-    <p>10 peserta terawal berpeluang menebus hadiah istimewa!</p>
-  </header>
+ <!-- HEADER -->
+<header>
+  <div class="logo">
+    <!-- GANTI logo sebenar klinik -->
+    <img src="https://github.com/sihat9/mari-jalan-dengan-doktor/blob/main/img/logo-kss.png?raw=true" alt="Logo Klinik">
+    <span class="logo-text">Klinik SihatSokmo</span>
+  </div>
+  <div class="countdown-container">
+    <div class="countdown-title">PROGRAM INI AKAN BERMULA DALAM</div>
+    <div class="countdown-timer"><span id="countdown-days" class="countdown-days">00</span> Hari <span id="countdown-hours">00</span>:<span id="countdown-minutes">00</span>:<span id="countdown-seconds">00</span> <span class="countdown-lagi">Lagi!</span></div>
+  </div>
+  <h1>Pendaftaran Program "Mari Jalan Dengan Doktor"</h1>
+  <p class="blinking-text">10 peserta terawal berpeluang menebus hadiah istimewa!</p>
+</header>
+
+<style>
+  /* Tambah dalam bahagian CSS */
+  .blinking-text {
+    color: #FF0000; /* Warna merah */
+    font-weight: bold;
+    animation: blink 1s infinite;
+    text-shadow: 0 0 5px rgba(255,0,0,0.5); /* Efek glow merah */
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>
 
   <!-- SLIDER -->
   <div class="slider-container">
