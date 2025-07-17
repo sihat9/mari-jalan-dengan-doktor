@@ -649,7 +649,7 @@ $('regForm').addEventListener('submit',async e=>{
     loadInfo(ok=>{
       $('regForm').style.display='none';$('confirmationMessage').style.display='block';
       const early=ok && count<=10;
-      $('msgLine').textContent=early?'Tahniah! Anda antara 10 peserta terawal yang mendaftar untuk program ini.':'Tahniah! Anda telah berjaya didaftarkan untuk program ini.';
+      $('msgLine').textContent=early?'Tahniah! Anda antara 10 peserta terawal yang mendaftar untuk program ini, dan anda layak untuk menebus hadiah istimewa.':'Tahniah! Anda telah berjaya didaftarkan untuk program ini.';
       
       // Set name and IC for both cards
       $('vName').textContent = data.fullName;
