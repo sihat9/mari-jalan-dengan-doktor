@@ -81,6 +81,33 @@ header p{color:var(--gray);}
   box-shadow: 0 6px 20px rgba(44, 123, 229, 0.6);
 }
 
+/* BUTANG TENTATIF TERAPUNG */
+.floating-tentatif-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  z-index: 999;
+}
+.floating-tentatif-btn button {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0, 217, 126, 0.4);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+.floating-tentatif-btn button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 217, 126, 0.6);
+}
+
 /* ANIMASI SCROLL INDICATOR */
 .scroll-indicator {
   text-align: center;
@@ -378,7 +405,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
     0 -1px 0 rgba(0,0,0,0.3);
 }
 
-#tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000;}
+#tentatifModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000;}
 #tentatifModal .box{background:#fff;padding:30px;border-radius:10px;max-width:800px;width:90%;max-height:80vh;overflow-y:auto;}
 #closeModalBtn{display:block;margin:20px auto 0;padding:8px 24px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;}
 
@@ -461,18 +488,35 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Style baru untuk highlight waktu */
+.time-highlight {
+  background-color: #ffeb3b;
+  color: #333;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .countdown-container {
     position: static;
     margin-top: 15px;
   }
-  .floating-reg-btn {
+  .floating-reg-btn, .floating-tentatif-btn {
     bottom: 20px;
     right: 20px;
   }
-  .floating-reg-btn button {
+  .floating-reg-btn {
+    bottom: 20px;
+  }
+  .floating-tentatif-btn {
+    bottom: 90px;
+  }
+  .floating-reg-btn button, .floating-tentatif-btn button {
     padding: 10px 20px;
     font-size: 14px;
+  white-space: nowrap;
+  min-width: 120px;
   }
 }
 </style>
@@ -679,9 +723,9 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
           <div class="tentatif-time">9.00 pagi</div>
           <div class="tentatif-content">
             <strong>Program tambahan bermula</strong>
-            <p>Semakan kelayakan ujian saringan percuma PEKAB40 (9 pagi sehingga 11.30 pagi)</p>
-            <p>Kempen derma darah (9 pagi sehingga 2.30 petang)</p>
-            <p>Pemeriksaan mata percuma (9 pagi sehingga 12.30 tengahari)</p>
+            <p>Semakan kelayakan ujian saringan percuma PEKAB40 (<span class="time-highlight">9 pagi sehingga 11.30 pagi</span>)</p>
+            <p>Kempen derma darah (<span class="time-highlight">9 pagi sehingga 2.30 petang</span>)</p>
+            <p>Pemeriksaan mata percuma (<span class="time-highlight">9 pagi sehingga 12.30 tengahari</span>)</p>
             <p>Aktiviti mewarna untuk kanak-kanak</p>
           </div>
         </div>
@@ -715,6 +759,13 @@ input:focus,textarea:focus{outline:none;border-color:var(--primary);}
   </button>
 </div>
 
+<!-- BUTANG TENTATIF TERAPUNG -->
+<div class="floating-tentatif-btn">
+  <button onclick="document.getElementById('tentatifModal').style.display='flex'">
+    📅 Lihat Tentatif
+  </button>
+</div>
+
 <!-- ==== SCRIPT ==== -->
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
@@ -728,8 +779,7 @@ let icSet=new Set(),count=0,ready=false;
   const auto=()=>timer=setInterval(()=>go((cur+1)%s.length),5000);
   b.forEach(btn=>btn.onclick=()=>{clearInterval(timer);go(+btn.dataset.i);auto();});auto();})();
 
-/* Modal - automatically show on page load */
-$('tentatifModal').style.display='flex';
+/* Modal */
 $('closeModalBtn').onclick=()=>$('tentatifModal').style.display='none';
 $('tentatifModal').onclick=e=>{if(e.target===$('tentatifModal'))$('tentatifModal').style.display='none';};
 $('tentatifBtn').onclick=e=>{e.preventDefault();$('tentatifModal').style.display='flex';};
